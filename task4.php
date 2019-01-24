@@ -49,7 +49,7 @@
                 die("Не удалось подключиться к MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error);
 
             if (!$mysqli->multi_query($this->query)) {
-                echo "Не удалось выполнить мультизапрос: (" . $mysqli->errno . ") " . $mysqli->error;
+                die("Не удалось выполнить мультизапрос: (" . $mysqli->errno . ") " . $mysqli->error);
             }
         }
     }
