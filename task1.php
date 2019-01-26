@@ -1,6 +1,9 @@
 <?php
     function searchInArray($a, $b)
     {
+        if($b < $a[0] || $b > $a[count($a) - 1])
+            return false;
+
         $start_index = 0;
         $stop_index = count($a) - 1;
         $middle = floor(($stop_index + $start_index) / 2);
