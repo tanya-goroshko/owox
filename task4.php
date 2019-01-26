@@ -41,7 +41,7 @@
                 }
             }
 
-            $this->query .= "; COMMIT;";
+            $this->query .= ";";
 
             $mysqli = new mysqli($this->servername, $this->username, $this->password);
 
@@ -49,7 +49,14 @@
                 die("Не удалось подключиться к MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error);
 
             if (!$mysqli->multi_query($this->query)) {
-                die("Не удалось выполнить мультизапрос: (" . $mysqli->errno . ") " . $mysqli->error);
+                echo "Не удалось выполнить мультизапрос: (" . $mysqli->errno . ") " . $mysqli->error;
+                $this->query = "ROLLBACK;";
+                $mysqli->query($this->query);
+                $mysqli->close();
+            }else{
+                $this->query = "COMMIT;";
+                $mysqli->query($this->query);
+                $mysqli->close();
             }
         }
     }
